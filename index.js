@@ -3,6 +3,29 @@ import './style.css';
 
 const app = document.getElementById('app');
 
+// State
+const winningState = [
+  // Diagonal
+  [0, 4, 8],
+  [2, 4, 6],
+
+  // Columns
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+
+  // Rows
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+];
+
+let xState = [];
+let oState = [];
+
+let xTurn = true;
+
+// Draw
 const grid = document.createElement('div');
 grid.classList.add('grid');
 
@@ -30,3 +53,32 @@ result.appendChild(restartButton);
 app.appendChild(grid);
 
 // app.appendChild(result);
+
+// Events
+const cellDiv = document.querySelectorAll('.cell');
+
+const drawCell = (element, xTurn) =>
+  xTurn ? element.classList.add('x') : element.classList.add('o');
+
+const saveTurn = (value, xTurn) =>
+  xTurn ? xState.push(value) : oState.push(value);
+
+const turn = (event) => {
+  // click validation
+  const element = event.target;
+  if (element.classList.contains('x') || element.classList.contains('o'))
+    return;
+
+  // draw x/o
+  drawCell(element, xTurn);
+
+  // save cell index
+  saveTurn(parseInt(element.dataset.id), xTurn);
+
+  // x or o
+  xTurn = !xTurn;
+
+  console.log(xState, oState);
+};
+
+cellDiv.forEach((cell) => cell.addEventListener('click', turn));
