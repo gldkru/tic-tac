@@ -47,6 +47,19 @@ resultText.textContent = 'Game over!';
 const restartButton = document.createElement('button');
 restartButton.textContent = 'Restart';
 
+// added game over
+restartButton.addEventListener('click', () => {
+  result.remove();
+
+  const cellDiv = document.querySelectorAll('.cell');
+  cellDiv.forEach((cell) => cell.classList.remove('x', 'o'));
+
+  xState = [];
+  oState = [];
+
+  xTurn = true;
+});
+
 result.appendChild(resultText);
 result.appendChild(restartButton);
 
@@ -75,10 +88,17 @@ const turn = (event) => {
   // save cell index
   saveTurn(parseInt(element.dataset.id), xTurn);
 
+  console.log(xState, oState);
+
+  // game over
+  if (xState.length + oState.length === 9) {
+    app.appendChild(result);
+
+    return;
+  }
+
   // x or o
   xTurn = !xTurn;
-
-  console.log(xState, oState);
 };
 
 cellDiv.forEach((cell) => cell.addEventListener('click', turn));
