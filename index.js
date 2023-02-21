@@ -4,7 +4,7 @@ import './style.css';
 const app = document.getElementById('app');
 
 // State
-const winningState = [
+const winningStates = [
   // Diagonal
   [0, 4, 8],
   [2, 4, 6],
@@ -76,6 +76,9 @@ const drawCell = (element, xTurn) =>
 const saveTurn = (value, xTurn) =>
   xTurn ? xState.push(value) : oState.push(value);
 
+const checkWin = (winningState, state) =>
+  winningState.every((number) => state.includes(number));
+
 const turn = (event) => {
   // click validation
   const element = event.target;
@@ -89,6 +92,18 @@ const turn = (event) => {
   saveTurn(parseInt(element.dataset.id), xTurn);
 
   console.log(xState, oState);
+
+  // winner
+  winningStates.forEach((winningState) => {
+    const xWins = checkWin(winningState, xState);
+    const oWins = checkWin(winningState, oState);
+
+    if (xWins || oWins) {
+      resultText.textContent = xWins ? 'X win!' : 'O win!';
+
+      app.appendChild(result);
+    }
+  });
 
   // game over
   if (xState.length + oState.length === 9) {
