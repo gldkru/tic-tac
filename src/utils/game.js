@@ -1,3 +1,5 @@
+import { turnIsRecorded } from './turn';
+
 export const startGame = () => {
   let xState = [];
   let oState = [];
@@ -9,8 +11,6 @@ export const startGame = () => {
 
     xTurn ? xState.push(id) : oState.push(id);
 
-    element.classList.add(xTurn ? 'x' : 'o');
-
     xTurn = !xTurn;
 
     console.log(xState, oState);
@@ -19,6 +19,8 @@ export const startGame = () => {
   const resetGame = () => {};
 
   return {
+    xState,
+    oState,
     turn,
     resetGame,
   };
