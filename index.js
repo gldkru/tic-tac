@@ -54,8 +54,11 @@ restartButton.addEventListener('click', () => {
   const cellDiv = document.querySelectorAll('.cell');
   cellDiv.forEach((cell) => cell.classList.remove('x', 'o'));
 
+  // reset state
   xState = [];
   oState = [];
+
+  resultText.textContent = 'Game over!';
 
   xTurn = true;
 });
@@ -102,6 +105,8 @@ const turn = (event) => {
       resultText.textContent = xWins ? 'X win!' : 'O win!';
 
       app.appendChild(result);
+
+      return;
     }
   });
 
