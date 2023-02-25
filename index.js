@@ -1,8 +1,8 @@
-import { Grid } from './src/components/Grid';
+import { App } from './src/components/App';
 
 // Import stylesheets
 import './style.css';
 
 const app = document.getElementById('app');
 
-app.appendChild(Grid());
+app.appendChild(App());
