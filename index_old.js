@@ -132,11 +132,11 @@ cellDiv.forEach((cell) => cell.addEventListener('click', turn));
 // winning state
 
 // turn
-// - validation turn
+// - validation turn +++
 
 //// Components
 
-// Grid (Board)
-// Cell
+// Grid (Board) +++
+// Cell +++
 // Result
 // Button
