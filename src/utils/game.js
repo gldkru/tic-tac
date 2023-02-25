@@ -1,4 +1,5 @@
-import { turnIsRecorded } from './turn';
+import { turnIsRecorded, calculateWinner, calculateGameOver } from './turn';
+import { winningStates } from './consts';
 
 export const startGame = () => {
   let xState = [];
@@ -10,6 +11,15 @@ export const startGame = () => {
     if (turnIsRecorded([...xState, ...oState], id)) return;
 
     xTurn ? xState.push(id) : oState.push(id);
+
+    // calculate winner
+
+    // calculate game over
+    if (calculateGameOver([...xState, ...oState])) {
+      console.log('Game over!');
+
+      return;
+    }
 
     xTurn = !xTurn;
 
