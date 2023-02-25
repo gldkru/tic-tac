@@ -122,21 +122,3 @@ const turn = (event) => {
 };
 
 cellDiv.forEach((cell) => cell.addEventListener('click', turn));
-
-// game
-// - start game
-// - calculate winner
-// - calculate game over
-// - restart game
-
-// winning state
-
-// turn
-// - validation turn +++
-
-//// Components
-
-// Grid (Board) +++
-// Cell +++
-// Result
-// Button

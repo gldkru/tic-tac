@@ -1,18 +1,13 @@
 import { turnIsRecorded, calculateWinner, calculateGameOver } from './turn';
 import { winningStates } from './consts';
 
-export const startGame = ({ showGameResult }) => {
-  const initialValues = () => {
-    return {
-      xState: [],
-      oState: [],
-      xTurn: true,
-    };
-  };
+export const startGame = () => {
+  let xState = [];
+  let oState = [];
+  let xTurn = true;
 
-  let { xState, oState, xTurn } = initialValues();
-
-  const turn = ({ id }) => {
+  const turn = ({ id, showGameResult }) => {
+    if (!id && id !== 0) return;
     if (turnIsRecorded([...xState, ...oState], id)) return;
 
     xTurn ? xState.push(id) : oState.push(id);
@@ -22,7 +17,6 @@ export const startGame = ({ showGameResult }) => {
       if (typeof showGameResult === 'function') {
         showGameResult({
           text: winner === 'x' ? 'X wins!' : 'O wins!',
-          onReset: initialValues,
         });
       }
 
@@ -31,7 +25,7 @@ export const startGame = ({ showGameResult }) => {
 
     if (calculateGameOver([...xState, ...oState])) {
       if (typeof showGameResult === 'function') {
-        showGameResult({ text: 'Game over!', onReset: initialValues });
+        showGameResult({ text: 'Game over!' });
       }
 
       return;
@@ -39,12 +33,12 @@ export const startGame = ({ showGameResult }) => {
 
     xTurn = !xTurn;
 
-    console.log(xState, oState);
+    // console.log(xState, oState);
   };
 
   return {
+    turn,
     xState,
     oState,
-    turn,
   };
 };
