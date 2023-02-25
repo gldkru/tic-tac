@@ -3,7 +3,9 @@ import { renderClassLists } from '../utils/dom';
 import { Grid } from './Grid';
 
 export const App = () => {
-  const { turn, resetGame, xState, oState } = startGame();
+  const { turn, xState, oState } = startGame({
+    showGameResult: ({ text, onReset }) => console.log(text),
+  });
 
   return Grid({
     onClickCell: (event) => {
