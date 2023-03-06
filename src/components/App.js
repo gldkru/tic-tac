@@ -26,6 +26,7 @@ export const App = () => {
 
   const grid = Grid({
     onClickCell(event) {
+      console.log('turn');
       turn({
         id: parseInt(event.target.dataset.id),
         showGameResult: ({ text }) => {
@@ -33,7 +34,8 @@ export const App = () => {
           this.appendChild(
             Result({
               text,
-              onClick: () => {
+              onClick: (event) => {
+                event.stopPropagation();
                 const props = startGame();
 
                 // updated props
